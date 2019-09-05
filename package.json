@@ -1,6 +1,6 @@
 {
   "name": "baseturngame",
-  "version": "0.2.0-dev.12",
+  "version": "0.2.0-dev.1",
   "description": "A game of taking turns",
   "main": "index.js",
   "scripts": {
@@ -63,5 +63,5 @@
     "typescript": "~3.5.3",
     "write-pkg": "^4.0.0"
   },
-  "date": "Mon Sep 02 2019"
+  "date": "Wed Sep 04 2019"
 }
