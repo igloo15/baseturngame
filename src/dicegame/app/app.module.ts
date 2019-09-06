@@ -7,15 +7,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './modules/angular-material.module';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
+import { BaseTurnLibModule } from 'baseturnlib';
 import { AppComponent } from './app.component';
-import { GameJsonDialogComponent } from './components/game-json-dialog/game-json-dialog.component';
-import { HotkeysDialogComponent } from './components/hotkeys-dialog/hotkeys-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    GameJsonDialogComponent,
-    HotkeysDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -24,10 +21,11 @@ import { HotkeysDialogComponent } from './components/hotkeys-dialog/hotkeys-dial
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG})
+    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
+    BaseTurnLibModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [GameJsonDialogComponent, HotkeysDialogComponent]
+  entryComponents: []
 })
 export class AppModule { }

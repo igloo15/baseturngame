@@ -1,0 +1,17 @@
+.diceblock {
+    border-radius: 25px;
+    border: 2px solid black;
+    background: white;   
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diceblock-text {
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: -5px;
+}

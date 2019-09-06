@@ -1,13 +1,45 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "src",
   "projects": {
-    "baseturn-game": {
-      "root": "",
-      "sourceRoot": "src",
+    "baseturnlib": {
+      "root": "src/baseturnlib",
+      "sourceRoot": "src/baseturnlib",
+      "projectType": "library",
+      "prefix": "btl",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "src/baseturnlib/tsconfig.app.json",
+            "project": "src/baseturnlib/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/baseturnlib/tsconfig.app.json",
+              "src/baseturnlib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dicegame": {
+      "root": "src/dicegame",
+      "sourceRoot": "src/dicegame",
       "projectType": "application",
-      "prefix": "btg",
+      "prefix": "dg",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -17,17 +49,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist/dicegame",
+            "index": "src/dicegame/index.html",
+            "main": "src/dicegame/main.ts",
+            "polyfills": "src/dicegame/polyfills.ts",
+            "tsConfig": "src/dicegame/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "src/dicegame/favicon.ico",
+              "src/dicegame/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/dicegame/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -36,8 +68,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "src/dicegame/environments/environment.ts",
+                  "with": "src/dicegame/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -62,26 +94,26 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "baseturn-game:build"
+            "browserTarget": "dicegame:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "baseturn-game:build:production"
+              "browserTarget": "dicegame:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "baseturn-game:build"
+            "browserTarget": "dicegame:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "src/dicegame/tsconfig.app.json",
+              "src/dicegame/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -91,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "baseturn-game"
+  "defaultProject": "dicegame"
 }

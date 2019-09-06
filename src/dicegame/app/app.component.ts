@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Hotkeys } from './services/hotkeys.service';
-import '../assets/test.svg';
+import { Hotkeys } from 'baseturnlib';
 
 @Component({
   selector: 'app-root',
