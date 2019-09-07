@@ -11,7 +11,7 @@
     "build-lib-watch": "ng build baseturnlib --watch",
     "build-app": "ng build dicegame",
     "build": "ng build --prod",
-    "deploy": "npm run update-version && npm run build",
+    "deploy": "npm run update-version && npm run build-lib && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
