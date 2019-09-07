@@ -1,0 +1,8 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-around space-around">
+    <ng-container *ngFor="let dice of diceRoll">
+        <btl-diceblock [endValue]="dice" [minValue]="1" [maxValue]="maxValue" [duration]="duration"></btl-diceblock>
+    </ng-container>
+</div>
+    
+
+

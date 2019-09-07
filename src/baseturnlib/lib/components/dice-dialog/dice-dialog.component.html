@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Dice</h2>
+<mat-dialog-content>
+    <ng-container *ngIf="rollingDice">
+        <btl-diceroller [numberOfDice]="7" [maxValue]="22" [duration]="duration" (diceRolled)="onRolled($event)"></btl-diceroller>
+    </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="onRoll()">Roll</button>
+    <button mat-raised-button (click)="onDone()">Done</button>
+</mat-dialog-actions>

@@ -13,3 +13,4 @@ export * from './lib/models/utility';
 export * from './lib/components/game-json-dialog/game-json-dialog.component';
 export * from './lib/components/hotkeys-dialog/hotkeys-dialog.component';
 export * from './lib/components/diceblock/diceblock.component';
+export * from './lib/components/dice-dialog/dice-dialog.component';

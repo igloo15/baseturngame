@@ -10,12 +10,16 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { GameJsonDialogComponent } from './components/game-json-dialog/game-json-dialog.component';
 import { HotkeysDialogComponent } from './components/hotkeys-dialog/hotkeys-dialog.component';
 import { DiceblockComponent } from './components/diceblock/diceblock.component';
+import { DicerollerComponent } from './components/diceroller/diceroller.component';
+import { DiceDialogComponent } from './components/dice-dialog/dice-dialog.component';
 
 @NgModule({
   declarations: [
     GameJsonDialogComponent,
     HotkeysDialogComponent,
-    DiceblockComponent
+    DiceblockComponent,
+    DicerollerComponent,
+    DiceDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import { DiceblockComponent } from './components/diceblock/diceblock.component';
   ],
   providers: [],
   bootstrap: [],
-  entryComponents: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent],
-  exports: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent]
+  entryComponents: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent, DicerollerComponent, DiceDialogComponent],
+  exports: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent, DicerollerComponent, DiceDialogComponent]
 })
 export class BaseTurnLibModule { }

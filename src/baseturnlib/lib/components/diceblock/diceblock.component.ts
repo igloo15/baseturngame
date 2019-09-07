@@ -13,10 +13,12 @@ export class DiceblockComponent implements OnInit, AfterViewInit {
   private loopIndex = 0;
   private countUp: CountUp;
   private myInternalDivElem: HTMLElement;
+  private animationDurationSeconds = 0.3;
 
   @Input() minValue = 1;
   @Input() maxValue = 6;
   @Input() endValue: number;
+  @Input() duration = 10000;
 
   constructor(private zone: NgZone, private el: ElementRef) { 
   }
@@ -25,11 +27,12 @@ export class DiceblockComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.loopCount = Math.ceil(this.duration / (this.animationDurationSeconds * 1000));
     this.myInternalDivElem = this.el.nativeElement.querySelector('.diceblock-text');
     const initialValue = GameUtil.getRandomInt(this.minValue, this.maxValue + 1);
     this.countUp = new CountUp(this.myInternalDivElem, initialValue, {
       useEasing: false,
-      duration:0.3
+      duration:this.animationDurationSeconds
     });
     this.animate();
   }
