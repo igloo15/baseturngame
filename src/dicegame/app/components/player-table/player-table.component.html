@@ -1,6 +1,21 @@
 <mat-card>
     <mat-card-title>Player {{name}}</mat-card-title>
     <mat-card-content>
-        Game stuff
+        <mat-card style="background-color:rgb(128, 165, 42)">
+            <mat-card-title>Waiting Pieces</mat-card-title>
+            <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between space-around">
+                <ng-container *ngFor="let piece of waitingpieces">
+                    <div class="game-piece" [ngClass]="{'blue-player': name === 'One', 'red-player': name !== 'One'}"></div>
+                </ng-container>
+            </mat-card-content>
+        </mat-card>
+        <mat-card style="background-color:rgb(128, 165, 42)">
+                <mat-card-title>Completed Pieces</mat-card-title>
+                <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between space-around">
+                    <ng-container *ngFor="let piece of completepieces">
+                        <div class="game-piece" [ngClass]="{'blue-player': name === 'One', 'red-player': name !== 'One'}"></div>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
     </mat-card-content>
 </mat-card>

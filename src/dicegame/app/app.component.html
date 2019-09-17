@@ -7,8 +7,8 @@
       <dg-game-table fxFlex="50"></dg-game-table>
       <dg-player-table fxFlex="25" name="Two" fxFlexFill></dg-player-table>
   </div>
-  <div>
-      <button (click)="openDiceRoller()">Open Dice Roller</button>
-      <btl-diceroller [numberOfDice]="7" [maxValue]="22"></btl-diceroller>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+      <button mat-raised-button (click)="openDiceRoller()">Roll</button>
+      <btl-diceroller [numberOfDice]="1" [maxValue]="4"></btl-diceroller>
   </div>
 </div>

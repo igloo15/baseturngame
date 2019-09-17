@@ -7,8 +7,20 @@
     background-color: white;
 }
 
+.safe-game-box {
+    border: solid 3px black;
+    box-sizing:border-box;
+    width: 125px;
+    height: 125px;
+    background-color: green;
+}
+
 mat-icon {
     font-size: 50px;
     width:50px;
     height:50px;
+}
+
+.circle-player {
+    background-color: blue;
 }

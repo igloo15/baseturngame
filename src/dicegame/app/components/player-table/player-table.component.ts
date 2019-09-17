@@ -7,6 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlayerTableComponent implements OnInit {
 
+  public waitingpieces: number[] = [1, 2, 3, 4, 5, 6, 7];
+  public completepiecies: number[] = [];
+
   @Input() name:string;
   
   constructor() { }
