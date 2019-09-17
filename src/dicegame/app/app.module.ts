@@ -9,10 +9,14 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 import { BaseTurnLibModule } from 'baseturnlib';
 import { AppComponent } from './app.component';
+import { GameTableComponent } from './components/game-table/game-table.component';
+import { PlayerTableComponent } from './components/player-table/player-table.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GameTableComponent,
+    PlayerTableComponent
   ],
   imports: [
     BrowserModule,

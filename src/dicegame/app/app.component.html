@@ -1,10 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div fxFlexFill fxLayout="column" fxLayoutAlign="center space-around" id="main-content">
-  <div fxFlex="70">
-      <button (click)="openDiceRoller()">Open Dice Roller</button>
+<div fxFlexFill fxLayout="column" fxLayoutAlign="space-between space-between" id="main-content">
+  <h2>Ur Game</h2>
+  <div fxLayout="row">
+      <dg-player-table fxFlex="25" name="One" fxFlexFill></dg-player-table>
+      <dg-game-table fxFlex="50"></dg-game-table>
+      <dg-player-table fxFlex="25" name="Two" fxFlexFill></dg-player-table>
   </div>
-  <div fxFlex="30">
+  <div>
+      <button (click)="openDiceRoller()">Open Dice Roller</button>
       <btl-diceroller [numberOfDice]="7" [maxValue]="22"></btl-diceroller>
   </div>
 </div>
