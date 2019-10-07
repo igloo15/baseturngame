@@ -1,0 +1,6 @@
+<div [id]="spotId" class="game-box noselect" fxLayoutAlign="center center" (click)="onClick()">
+    <div *ngIf="hasPlayer" class="circle-player"></div>
+    <ng-container *ngIf="isSpecial">
+        <mat-icon>brightness_low</mat-icon>
+    </ng-container>
+</div>

@@ -11,12 +11,14 @@ import { BaseTurnLibModule } from 'baseturnlib';
 import { AppComponent } from './app.component';
 import { GameTableComponent } from './components/game-table/game-table.component';
 import { PlayerTableComponent } from './components/player-table/player-table.component';
+import { BoardSpotComponent } from './components/board-spot/board-spot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameTableComponent,
-    PlayerTableComponent
+    PlayerTableComponent,
+    BoardSpotComponent
   ],
   imports: [
     BrowserModule,

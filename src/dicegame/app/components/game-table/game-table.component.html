@@ -1,92 +1,38 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout="row">
-        <div id="player-1-4" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            <mat-icon>brightness_low</mat-icon>
-        </div>
-        <div id="center-1" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            2
-        </div>
-        <div id="player-2-4" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            <mat-icon>brightness_low</mat-icon>
-        </div>
+        <dg-board-spot [spotId]="'player-1-4'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'middle-1'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-4'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="player-1-3" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            4
-        </div>
-        <div id="center-2" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            5
-        </div>
-        <div id="player-2-3" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            6
-        </div>
+        <dg-board-spot [spotId]="'player-1-3'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'middle-2'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-3'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="player-1-2" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>7
-        </div>
-        <div id="center-3" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            8
-        </div>
-        <div id="player-2-2" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            9
-        </div>
+        <dg-board-spot [spotId]="'player-1-2'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'middle-3'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-2'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="player-1-1" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            10
-        </div>
-        <div id="center-4" class="safe-game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            <mat-icon>brightness_low</mat-icon>
-        </div>
-        <div id="player-2-2" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            12
-        </div>
+        <dg-board-spot [spotId]="'player-1-1'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'middle-4'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-1'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="center-5" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            13
-        </div>
+        <dg-board-spot [spotId]="'middle-5'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="center-6" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            14
-        </div>
+        <dg-board-spot [spotId]="'middle-6'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="player-1-6" class="game-box" fxLayoutAlign="center center">
-            <mat-icon>brightness_low</mat-icon>
-        </div>
-        <div id="center-7" class="game-box" fxLayoutAlign="center center">
-            16
-        </div>
-        <div id="player-2-6" class="game-box" fxLayoutAlign="center center">
-            <mat-icon>brightness_low</mat-icon>
-        </div>
+        <dg-board-spot [spotId]="'player-1-6'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'middle-7'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-6'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <div id="player-1-5" class="game-box" fxLayoutAlign="center center">
-            18
-        </div>
-        <div id="center-8" class="game-box" fxLayoutAlign="center center">
-            19
-        </div>
-        <div id="player-2-5" class="game-box" fxLayoutAlign="center center">
-            <div class="circle-player"></div>
-            20
-        </div>
+        <dg-board-spot [spotId]="'player-1-5'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'middle-8'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-5'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
 </div>

@@ -12,6 +12,7 @@ import { HotkeysDialogComponent } from './components/hotkeys-dialog/hotkeys-dial
 import { DiceblockComponent } from './components/diceblock/diceblock.component';
 import { DicerollerComponent } from './components/diceroller/diceroller.component';
 import { DiceDialogComponent } from './components/dice-dialog/dice-dialog.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DiceDialogComponent } from './components/dice-dialog/dice-dialog.compon
     HotkeysDialogComponent,
     DiceblockComponent,
     DicerollerComponent,
-    DiceDialogComponent
+    DiceDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,9 @@ import { DiceDialogComponent } from './components/dice-dialog/dice-dialog.compon
   ],
   providers: [],
   bootstrap: [],
-  entryComponents: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent, DicerollerComponent, DiceDialogComponent],
-  exports: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent, DicerollerComponent, DiceDialogComponent]
+  entryComponents: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent, DicerollerComponent, 
+    DiceDialogComponent, ConfirmationDialogComponent],
+  exports: [GameJsonDialogComponent, HotkeysDialogComponent, DiceblockComponent, DicerollerComponent, 
+    DiceDialogComponent, ConfirmationDialogComponent]
 })
 export class BaseTurnLibModule { }

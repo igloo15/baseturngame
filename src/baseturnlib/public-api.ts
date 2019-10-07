@@ -5,6 +5,7 @@
 export * from './lib/baseturnlib.module';
 export * from './lib/services/hotkeys.service';
 export * from './lib/services/game-storage.service';
+export * from './lib/services/game.service';
 export * from './lib/models/game-file';
 export * from './lib/models/player';
 export * from './lib/models/team';
@@ -14,3 +15,4 @@ export * from './lib/components/game-json-dialog/game-json-dialog.component';
 export * from './lib/components/hotkeys-dialog/hotkeys-dialog.component';
 export * from './lib/components/diceblock/diceblock.component';
 export * from './lib/components/dice-dialog/dice-dialog.component';
+export * from './lib/components/confirmation-dialog/confirmation-dialog.component';

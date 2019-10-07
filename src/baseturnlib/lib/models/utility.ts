@@ -27,10 +27,10 @@ export class GameUtil {
         return array;
     }
 
-    public static rollDice(amountOnDie: number, numberOfDice: number): number[] {
+    public static rollDice(maxValue: number, numberOfDice = 1, minValue = 1): number[] {
         const dieRolls = [];
         for (let i = 0; i < numberOfDice; i++) {
-            dieRolls.push(this.getRandomInt(1, amountOnDie + 1));
+            dieRolls.push(this.getRandomInt(minValue, maxValue + 1));
         }
         return dieRolls;
     }

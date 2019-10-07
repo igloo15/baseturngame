@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, AfterViewInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CountUp, CountUpOptions } from 'countup.js';
 import { GameUtil } from '../../models/utility';
 
@@ -7,7 +7,7 @@ import { GameUtil } from '../../models/utility';
   templateUrl: './diceblock.component.html',
   styleUrls: ['./diceblock.component.scss']
 })
-export class DiceblockComponent implements OnInit, AfterViewInit {
+export class DiceblockComponent implements OnInit, AfterViewInit, OnChanges {
 
   private loopCount = 50;
   private loopIndex = 0;
@@ -35,6 +35,13 @@ export class DiceblockComponent implements OnInit, AfterViewInit {
       duration:this.animationDurationSeconds
     });
     this.animate();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.countUp) {
+      this.loopIndex = 0;
+      this.animate();
+    }
   }
 
   private animate() {

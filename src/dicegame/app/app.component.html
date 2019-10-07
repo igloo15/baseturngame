@@ -1,14 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div fxFlexFill fxLayout="column" fxLayoutAlign="space-between space-between" id="main-content">
-  <h2>Ur Game</h2>
+<div fxFlexFill fxLayout="column" fxLayoutGap="2vh" id="main-content">
+  <div class="game-title">Ur Game</div>
+  <div class="player-turn-subtitle" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3vw">
+    <span>Current Turn : <b>{{this.diceGameService.looper.turnNumber}}</b></span>  
+    <span>Current Player : <b>Player {{this.diceGameService.looper.currentPlayer.name}}</b></span>
+  </div>
   <div fxLayout="row">
-      <dg-player-table fxFlex="25" name="One" fxFlexFill></dg-player-table>
+      <dg-player-table fxFlex="25" name="One" fxFlexFill [currentRoll]="diceGameService.playerOneRoll"></dg-player-table>
       <dg-game-table fxFlex="50"></dg-game-table>
-      <dg-player-table fxFlex="25" name="Two" fxFlexFill></dg-player-table>
+      <dg-player-table fxFlex="25" name="Two" fxFlexFill [currentRoll]="diceGameService.playerTwoRoll"></dg-player-table>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-around center">
-      <button mat-raised-button (click)="openDiceRoller()">Roll</button>
-      <btl-diceroller [numberOfDice]="1" [maxValue]="4"></btl-diceroller>
+      <button mat-raised-button (click)="nextTurn()" [disabled]="disableNextTurn" color="primary">Next Turn</button>
+      <button mat-raised-button (click)="openDiceRoller()" [disabled]="disableRolling" color="accent">Roll</button>
   </div>
 </div>

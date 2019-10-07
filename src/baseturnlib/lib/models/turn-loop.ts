@@ -23,17 +23,17 @@ export class TurnLoop {
      * The event occurs before the next play has started their turn
      * but after the previous play has finalized their turn
      */
-    public preTurnEvent: Subject<BetweenTurnEvent>;
+    public preTurnEvent: Subject<BetweenTurnEvent> = new Subject<BetweenTurnEvent>();
 
     /**
      * The turn for a player has been accepted and started
      */
-    public turnStartedEvent: Subject<TurnEvent>;
+    public turnStartedEvent: Subject<TurnEvent> = new Subject<TurnEvent>();
 
     /**
      * The player's turn is over but has not be finalized by completing player
      */
-    public postTurnEvent: Subject<BetweenTurnEvent>;
+    public postTurnEvent: Subject<BetweenTurnEvent> = new Subject<BetweenTurnEvent>();
 
     public endTurn(): () => any {
         this.postTurnEvent.next({
@@ -58,7 +58,11 @@ export class TurnLoop {
     }
 
     public takeTurn() {
+        if (this.currentPlayer) {
+            this.currentPlayer.isTheirTurn = false;
+        }
         this.currentPlayer = this.getNextPlayer();
+        this.currentPlayer.isTheirTurn = true;
         this.turnNumber++;
         this.turnStartedEvent.next({
             currentTurnNumber: this.turnNumber,
@@ -68,6 +72,16 @@ export class TurnLoop {
 
     public shufflePlayers() {
         this.players = GameUtil.randomizeArray<Player>(this.players);
+        for(let i = 0; i < this.players.length; i++) {
+            this.players[i].index = i + 1;
+        }
+    }
+
+    public addPlayer(player: Player): TurnLoop {
+        this.players.push(player);
+        player.index = this.players.length;
+
+        return this;
     }
 
     public getNextPlayer(): Player {

@@ -1,0 +1,9 @@
+<h2 mat-dialog-title *ngIf="confirmationTitle">{{confirmationTitle}}</h2>
+<mat-dialog-content>
+    {{confirmationText}}
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutGap="5vw">
+    <button mat-raised-button color="primary" (click)="onComplete()" *ngIf="completeText">{{completeText}}</button>
+    <button mat-raised-button color="warn" (click)="onCancel()" *ngIf="cancelText">{{cancelText}}</button>
+</mat-dialog-actions>
+

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Piece } from '../../models/piece';
 
 @Component({
   selector: 'dg-player-table',
@@ -7,14 +8,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlayerTableComponent implements OnInit {
 
-  public waitingpieces: number[] = [1, 2, 3, 4, 5, 6, 7];
-  public completepiecies: number[] = [];
+  public waitingpieces: Piece[] = [new Piece(), new Piece(), new Piece(), new Piece(), new Piece(), new Piece(), new Piece()];
+  public completepiecies: Piece[] = [];
 
   @Input() name:string;
+  @Input() currentRoll: number;
   
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onWaitPieceClick(piece: Piece) {
+    console.log(piece);
   }
 
 }

@@ -2,6 +2,23 @@
     padding:10px;
 }
 
-h2 {
+h1 {
     text-align: center;
+}
+
+.game-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.player-turn-subtitle {
+    text-align: center;
+    font-size: 20px;
+}
+
+button {
+    height: 5vh;
+    width: 10vh;
+    font-size: 20px;
 }
