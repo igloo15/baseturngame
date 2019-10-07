@@ -15,7 +15,7 @@ export class BoardSpotComponent implements OnInit {
 
   @Input() spotId: string;
   @Input() isSpecial: boolean;
-  
+  hasPlayer: boolean;
   @Output() clicked = new EventEmitter<IBoardSpotData>();
 
   spotData: IBoardSpotData;
