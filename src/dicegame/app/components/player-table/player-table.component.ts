@@ -9,7 +9,7 @@ import { Piece } from '../../models/piece';
 export class PlayerTableComponent implements OnInit {
 
   public waitingpieces: Piece[] = [new Piece(), new Piece(), new Piece(), new Piece(), new Piece(), new Piece(), new Piece()];
-  public completepiecies: Piece[] = [];
+  public completepieces: Piece[] = [];
 
   @Input() name:string;
   @Input() currentRoll: number;
