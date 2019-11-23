@@ -4,7 +4,6 @@
     box-sizing:border-box;
     width: 125px;
     height: 125px;
-    background-color: white;
 }
 
 mat-icon {
@@ -16,4 +15,21 @@ mat-icon {
 .circle-player {
     background-color: blue;
     width: 50px;
+}
+
+.aligned-with-icon{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px; /* optional */
+}
+
+.aligned-with-icon-relative{
+    // position: relative;
+    // top: -5px;
+    // margin-left: 5px; /* optional */
+    font-size:18px;
+}
+
+.home-area > span {
+    font-size: 20px;
 }

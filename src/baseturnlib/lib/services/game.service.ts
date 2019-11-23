@@ -5,6 +5,7 @@ import { NGXLogger } from 'ngx-logger';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { take } from 'rxjs/operators';
+import { GameJoinerDialogComponent } from '../components/game-joiner-dialog/game-joiner-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -27,17 +28,17 @@ export class GameService {
     this.gameStorage.save(this.saveFile);
   }
 
-  openConfirmationWindow(confirmationText: string, completeText = 'Confirm', cancelText = 'Cancel', 
-                          confirmationTitle?: string): Promise<boolean> {
+  openConfirmationWindow(confirmationText: string, completeText = 'Confirm', cancelText = 'Cancel',
+                         confirmationTitle?: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.dialog.open(ConfirmationDialogComponent, {
         hasBackdrop: true,
         disableClose: true,
         data: {
-          confirmationTitle: confirmationTitle,
-          confirmationText: confirmationText,
-          completeText: completeText,
-          cancelText: cancelText
+          confirmationTitle,
+          confirmationText,
+          completeText,
+          cancelText
         }
       }).afterClosed().pipe(take(1)).subscribe(result => {
         if (result === completeText) {
@@ -47,6 +48,26 @@ export class GameService {
         } else {
           reject('bad stuff happened');
         }
+      });
+    });
+  }
+
+  openConnectionWindow(defaultServer: string, defaultGameId: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.dialog.open(GameJoinerDialogComponent, {
+        hasBackdrop: true,
+        disableClose: true,
+        data: {
+          defaultServer,
+          defaultGameId
+        }
+      }).afterClosed().pipe(take(1)).subscribe(result => {
+        if (result === 'connected') {
+          resolve(true);
+        } else if (result === 'disconnected') {
+          resolve(false);
+        }
+        reject();
       });
     });
   }

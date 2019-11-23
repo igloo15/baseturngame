@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Join Game</h2>
+<mat-dialog-content>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Game Server" [(ngModel)]="gameServerUrl" [disabled]="gameServer.connected">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Game Id" [(ngModel)]="gameId" [disabled]="gameServer.connected">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button *ngIf="!gameServer.connected" mat-raised-button (click)="onConnect()">Connect</button>
+    <button *ngIf="gameServer.connected" mat-raised-button (click)="onDisconnect()">Disconnect</button>
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+</mat-dialog-actions>

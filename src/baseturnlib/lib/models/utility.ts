@@ -34,4 +34,11 @@ export class GameUtil {
         }
         return dieRolls;
     }
+
+    public static removeFromArray<T>(myArray: T[], item: T) {
+        const index = myArray.indexOf(item, 0);
+        if (index > -1) {
+            myArray.splice(index, 1);
+        }
+    }
 }

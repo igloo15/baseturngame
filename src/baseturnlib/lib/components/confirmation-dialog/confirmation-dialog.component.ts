@@ -16,7 +16,7 @@ export class ConfirmationDialogComponent implements OnInit {
   cancelText: string;
 
   constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) { 
+              @Inject(MAT_DIALOG_DATA) public data) {
       this.confirmationTitle = data.confirmationTitle;
       this.confirmationText = data.confirmationText;
       this.completeText = data.completeText;

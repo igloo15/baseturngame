@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DiceGameService } from '../../services/dice-game.service';
+import { Piece } from '../../models/piece';
 
 export interface IBoardSpotData {
   columnName: string;
-  player: number;
+  piece?: Piece;
   index: number;
+  active: boolean;
 }
 
 @Component({
@@ -15,28 +18,32 @@ export class BoardSpotComponent implements OnInit {
 
   @Input() spotId: string;
   @Input() isSpecial: boolean;
-  hasPlayer: boolean;
+  @Input() isHome: boolean;
+  @Input() isEnd: boolean;
   @Output() clicked = new EventEmitter<IBoardSpotData>();
 
   spotData: IBoardSpotData;
 
-  constructor() { }
+  constructor(private diceGameService: DiceGameService) {
+  }
 
   ngOnInit() {
     const stringParts = this.spotId.split('-');
-    if(stringParts.length === 2) {
+    if (stringParts.length === 2) {
       this.spotData = {
         columnName: stringParts[0],
-        player: -1,
-        index: +stringParts[1]
+        index: +stringParts[1],
+        active: false
       };
-    } else if(stringParts.length === 3) {
+    } else if (stringParts.length === 3) {
       this.spotData = {
-        columnName: stringParts[0],
-        player: +stringParts[1],
-        index: +stringParts[2]
+        columnName: `${stringParts[0]}-${stringParts[1]}`,
+        index: +stringParts[2],
+        active: false
       };
     }
+
+    this.diceGameService.registerBoardPiece(this.spotData);
   }
 
   onClick() {

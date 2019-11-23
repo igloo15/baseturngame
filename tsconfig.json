@@ -21,9 +21,6 @@
     "paths": {
       "baseturnlib": [
         "dist/baseturnlib"
-      ],
-      "baseturnlib/*": [
-        "dist/baseturnlib/*"
       ]
     }
   }

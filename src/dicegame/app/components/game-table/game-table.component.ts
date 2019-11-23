@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IBoardSpotData } from '../board-spot/board-spot.component';
+import { DiceGameService } from '../../services/dice-game.service';
 
 @Component({
   selector: 'dg-game-table',
@@ -8,13 +9,14 @@ import { IBoardSpotData } from '../board-spot/board-spot.component';
 })
 export class GameTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private diceGameService: DiceGameService) { }
 
   ngOnInit() {
   }
 
   onClicked(data: IBoardSpotData) {
     console.log(data);
+    this.diceGameService.spotClicked(data);
   }
 
 }

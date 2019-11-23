@@ -1,11 +1,11 @@
 <mat-card>
-    <mat-card-title>Player {{name}}</mat-card-title>
+    <mat-card-title>Player {{player.name}}</mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="2vh">
         <mat-card class="waiting-place">
             <mat-card-title>Waiting Pieces</mat-card-title>
-            <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between space-around">
-                <ng-container *ngFor="let piece of waitingpieces">
-                    <div class="game-piece" [ngClass]="{'blue-player': name === 'One', 'red-player': name !== 'One'}" (click)="onWaitPieceClick(piece)"></div>
+            <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between space-around" *ngIf="player">
+                <ng-container *ngFor="let piece of player.playerProps.waitingPieces">
+                    <dg-game-piece [piece]="piece"></dg-game-piece>
                 </ng-container>
             </mat-card-content>
         </mat-card>

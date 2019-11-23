@@ -15,15 +15,17 @@
         <dg-board-spot [spotId]="'player-2-2'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
-        <dg-board-spot [spotId]="'player-1-1'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-1-1'" [isHome]="true" (clicked)="onClicked($event)"></dg-board-spot>
         <dg-board-spot [spotId]="'middle-4'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
-        <dg-board-spot [spotId]="'player-2-1'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'player-2-1'" [isHome]="true" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
         <dg-board-spot [spotId]="'middle-5'" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
+        <dg-board-spot [spotId]="'complete-1-0'" [isEnd]="true" (clicked)="onClicked($event)"></dg-board-spot>
         <dg-board-spot [spotId]="'middle-6'" (clicked)="onClicked($event)"></dg-board-spot>
+        <dg-board-spot [spotId]="'complete-2-0'" [isEnd]="true" (clicked)="onClicked($event)"></dg-board-spot>
     </div>
     <div fxLayout="row">
         <dg-board-spot [spotId]="'player-1-6'" [isSpecial]="true" (clicked)="onClicked($event)"></dg-board-spot>
