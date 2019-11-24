@@ -1,11 +1,11 @@
-
+import { Random } from 'random-js';
 
 export class GameUtil {
 
+    private static internalRand = new Random();
+
     public static getRandomInt(min: number, max: number) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
+        return this.internalRand.integer(min, max);
     }
 
     public static randomizeArray<T>(array: T[]): T[] {
@@ -16,7 +16,7 @@ export class GameUtil {
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
           // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
+          randomIndex = this.internalRand.integer(0, currentIndex);
           currentIndex -= 1;
           // And swap it with the current element.
           temporaryValue = array[currentIndex];
@@ -30,7 +30,7 @@ export class GameUtil {
     public static rollDice(maxValue: number, numberOfDice = 1, minValue = 1): number[] {
         const dieRolls = [];
         for (let i = 0; i < numberOfDice; i++) {
-            dieRolls.push(this.getRandomInt(minValue, maxValue + 1));
+            dieRolls.push(this.getRandomInt(minValue, maxValue));
         }
         return dieRolls;
     }

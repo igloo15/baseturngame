@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Player } from 'baseturnlib';
 import { Piece } from '../../models/piece';
 import { DiceGameService } from '../../services/dice-game.service';
 import { DiceGameUtil } from '../../models/utility';
@@ -12,6 +11,7 @@ import { DiceGameUtil } from '../../models/utility';
 export class GamePieceComponent implements OnInit {
 
   @Input() piece: Piece;
+  @Input() isComplete: boolean;
 
   constructor(public diceGameService: DiceGameService) { }
 
@@ -19,7 +19,7 @@ export class GamePieceComponent implements OnInit {
   }
 
   makeActive(piece: Piece) {
-    if (this.piece.player.isTheirTurn && this.diceGameService.piecePicking) {
+    if (this.piece.player.isTheirTurn && this.diceGameService.piecePicking && !this.isComplete) {
       const currentStatus = this.piece.active;
       DiceGameUtil.clearActivePieces(this.piece.player);
       this.piece.active = !currentStatus;

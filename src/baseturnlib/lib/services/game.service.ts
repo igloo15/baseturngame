@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { take } from 'rxjs/operators';
 import { GameJoinerDialogComponent } from '../components/game-joiner-dialog/game-joiner-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { GameJoinerDialogComponent } from '../components/game-joiner-dialog/game
 export class GameService {
   public saveFile: GameFile;
 
-  constructor(private gameStorage: GameStorageService, private logger: NGXLogger, private dialog: MatDialog) {
+  constructor(private gameStorage: GameStorageService, private logger: NGXLogger,
+              private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.saveFile = gameStorage.getFile();
     this.logger.debug(this.saveFile);
   }
@@ -70,6 +72,10 @@ export class GameService {
         reject();
       });
     });
+  }
+
+  openMessage(message: string, dismissName = '', time = 5000) {
+    this.snackBar.open(message, dismissName, {duration: time});
   }
 
 }

@@ -21,6 +21,8 @@ export class DiceGameService {
 
 
   constructor(public gameService: GameService) {
+    this.randomCheck();
+
     this.looper = new TurnLoop();
     this.playerOne = this.createPlayer('One', 'blue');
     this.playerTwo = this.createPlayer('Two', 'red');
@@ -34,6 +36,20 @@ export class DiceGameService {
       }
     });
 
+  }
+
+  private randomCheck() {
+    const myCounts = [0, 0, 0, 0, 0];
+    for (let i = 0; i < 5000; i++) {
+      const value = GameUtil.rollDice(4, 1, 0)[0];
+      myCounts[value]++;
+    }
+    console.log('THIS IS A RANDOM CHECK');
+    console.log('==========================');
+    for (let j = 0; j < myCounts.length; j++) {
+      console.log(`Roll ${j}: ${myCounts[j]}`);
+    }
+    console.log('=========COMPLETE=========');
   }
 
   createPlayer(name: string, color: string): Player {
@@ -59,16 +75,14 @@ export class DiceGameService {
   roll() {
     this.clearSpotActive();
     this.piecePicking = true;
-    const rollValue = GameUtil.rollDice(4, 1, 0)[0];
-    console.log(`Roll : ${rollValue}`);
-    this.looper.currentPlayer.playerProps.playerRoll = rollValue;
-    if (this.looper.currentPlayer === this.playerOne) {
-      console.log(`Current Value ${this.playerOneRoll}`);
-      this.playerOneRoll = rollValue;
-    } else {
-      console.log(`Current Value ${this.playerTwoRoll}`);
-      this.playerTwoRoll = rollValue;
-    }
+    const pastValue = this.currentPlayer.playerProps.playerRoll;
+    this.currentPlayer.playerProps.playerRoll = -1;
+    setTimeout(() => {
+      const rollValue = GameUtil.rollDice(4, 1, 0)[0];
+      console.log(`Current Value: ${pastValue}`);
+      console.log(`Roll : ${rollValue}`);
+      this.currentPlayer.playerProps.playerRoll = rollValue;
+    }, 100);
   }
 
   togglePiece(piece: Piece) {
@@ -85,7 +99,7 @@ export class DiceGameService {
           }
         }
       } else {
-        console.log('roll first');
+        this.gameService.openMessage('roll higher next time');
       }
     }
   }
@@ -177,12 +191,14 @@ export class DiceGameService {
             currentPiece.index = spot.index;
             spot.piece = currentPiece;
             spot.active = false;
-            if (spot.isSpecial) {
-              this.roll();
-              this.piecePicking = true;
-            } else {
-              this.piecePicking = false;
-            }
+          }
+
+          if (spot.isSpecial) {
+            this.gameService.openMessage('Big Winner Rolling Again!!!!');
+            this.roll();
+            this.piecePicking = true;
+          } else {
+            this.piecePicking = false;
           }
         }
       });

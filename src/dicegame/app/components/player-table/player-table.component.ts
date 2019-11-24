@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Piece } from '../../models/piece';
-import { Player } from 'dist/baseturnlib';
+import { Player } from 'baseturnlib';
 
 @Component({
   selector: 'dg-player-table',

@@ -12,16 +12,16 @@
         <mat-card class="completed-place">
             <mat-card-title>Completed Pieces</mat-card-title>
             <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between space-around">
-                <ng-container *ngFor="let piece of completepieces">
-                    <div class="game-piece" [ngClass]="{'blue-player': name === 'One', 'red-player': name !== 'One'}"></div>
+                <ng-container *ngFor="let piece of player.playerProps.completedPieces">
+                    <dg-game-piece [piece]="piece" [isComplete]="true"></dg-game-piece>
                 </ng-container>
             </mat-card-content>
         </mat-card>
         <mat-card>
             <mat-card-title>Current Roll</mat-card-title>
             <mat-card-content fxLayout="row wrap" fxLayoutAlign="center center">
-                <ng-container *ngIf="currentRoll > -1">
-                    <btl-diceblock [minValue]="0" [maxValue]="4" [endValue]="currentRoll" [duration]="3000"></btl-diceblock>
+                <ng-container *ngIf="player.playerProps.playerRoll > -1">
+                    <btl-diceblock [minValue]="0" [maxValue]="4" [endValue]="player.playerProps.playerRoll" [duration]="3000"></btl-diceblock>
                 </ng-container>
             </mat-card-content>
         </mat-card>
