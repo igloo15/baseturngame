@@ -7,6 +7,7 @@ export interface IBoardSpotData {
   piece?: Piece;
   index: number;
   active: boolean;
+  isSpecial: boolean;
 }
 
 @Component({
@@ -33,13 +34,15 @@ export class BoardSpotComponent implements OnInit {
       this.spotData = {
         columnName: stringParts[0],
         index: +stringParts[1],
-        active: false
+        active: false,
+        isSpecial: this.isSpecial
       };
     } else if (stringParts.length === 3) {
       this.spotData = {
         columnName: `${stringParts[0]}-${stringParts[1]}`,
         index: +stringParts[2],
-        active: false
+        active: false,
+        isSpecial: this.isSpecial
       };
     }
 

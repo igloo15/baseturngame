@@ -13,11 +13,6 @@ export class DiceGameService {
   public playerTwo: Player;
   public piecePicking = false;
   public boardSpots: IBoardSpotData[] = [];
-  public completeSpot: IBoardSpotData = {
-    columnName: 'complete',
-    index: -1,
-    active: false
-  };
 
   playerOneRoll = -1;
   playerTwoRoll = -1;
@@ -45,6 +40,7 @@ export class DiceGameService {
     const player = new Player(name);
     player.playerProps.waitingPieces = [];
     player.playerProps.boardPieces = [];
+    player.playerProps.completedPieces = [];
     for (let index = 0; index < 7; index++) {
       this.addWaitingPiece(player);
     }
@@ -81,21 +77,11 @@ export class DiceGameService {
       const roll: number = this.looper.currentPlayer.playerProps.playerRoll;
       let spot: IBoardSpotData = null;
       if (roll > 0) {
-        if (piece.columnName) {
-          spot = this.retrieveSpot(piece.columnName, piece.index);
-          if (spot) {
-            const nextSpot = this.findNextSpot(spot, roll);
-            if (nextSpot) {
-              nextSpot.active = true;
-              if (nextSpot.columnName === 'complete') {
-                console.log('move home');
-              }
-            }
-          }
-        } else {
-          spot = this.retrieveSpot(this.currentPlayerColumn, roll);
-          if (spot) {
-            spot.active = true;
+        spot = this.findNextSpot(piece, roll);
+        if (spot) {
+          spot.active = true;
+          if (spot.columnName === 'complete') {
+            console.log('move home');
           }
         }
       } else {
@@ -104,16 +90,20 @@ export class DiceGameService {
     }
   }
 
-  retrieveSpot(columnName: string, index: number): IBoardSpotData {
-    for (const spot of this.boardSpots) {
-      if (spot.columnName === columnName && spot.index === index) {
-        return spot;
+  findNextSpot(current: Piece, movement: number): IBoardSpotData {
+    if (!current.columnName) {
+      const spot = this.retrieveSpot(this.currentPlayerColumn, movement);
+      if (spot && spot.piece) {
+        return null;
       }
+      return spot;
+    } else {
+      const currentSpot = this.retrieveSpot(current.columnName, current.index);
+      return this.findNextSpotWithStart(currentSpot, movement);
     }
-    return null;
   }
 
-  findNextSpot(currentSpot: IBoardSpotData, movement: number): IBoardSpotData {
+  findNextSpotWithStart(currentSpot: IBoardSpotData, movement: number): IBoardSpotData {
     const nextMovement = currentSpot.index + movement;
     let nextSpot: IBoardSpotData = null;
     if (currentSpot.columnName === this.currentPlayerColumn && currentSpot.index < 5) {
@@ -148,6 +138,8 @@ export class DiceGameService {
     if (nextSpot && nextSpot.piece) {
       if (nextSpot.piece.player === this.looper.currentPlayer) {
         nextSpot = null;
+      } else if (nextSpot.isSpecial) {
+        nextSpot = null;
       }
     }
 
@@ -169,15 +161,56 @@ export class DiceGameService {
               pastSpot.piece = null;
             }
           }
-          currentPiece.active = false;
-          currentPiece.columnName = spot.columnName;
-          currentPiece.index = spot.index;
-          spot.piece = currentPiece;
-          spot.active = false;
-          this.piecePicking = false;
+
+          if (spot.piece) {
+            const otherPlayerPiece = spot.piece;
+            this.removePieceFromBoard(otherPlayerPiece);
+            otherPlayerPiece.player.playerProps.waitingPieces.push(otherPlayerPiece);
+          }
+
+          if (spot.columnName === this.playerCompleteColumn) {
+            this.removePieceFromBoard(currentPiece);
+            this.currentPlayer.playerProps.completedPieces.push(currentPiece);
+          } else {
+            currentPiece.active = false;
+            currentPiece.columnName = spot.columnName;
+            currentPiece.index = spot.index;
+            spot.piece = currentPiece;
+            spot.active = false;
+            if (spot.isSpecial) {
+              this.roll();
+              this.piecePicking = true;
+            } else {
+              this.piecePicking = false;
+            }
+          }
         }
       });
     }
+  }
+
+  get isMoveAvailable(): boolean {
+    if (this.piecePicking) {
+      for (const piece of this.allPieces) {
+        const nextSpot = this.findNextSpot(piece, this.currentPlayer.playerProps.playerRoll);
+        if (nextSpot) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  get currentPlayer(): Player {
+    return this.looper.currentPlayer;
+  }
+
+  get otherPlayer(): Player {
+    if (this.playerOne.index === this.currentPlayer.index) {
+      return this.playerTwo;
+    }
+
+    return this.playerOne;
   }
 
   get currentPlayerColumn(): string {
@@ -200,6 +233,27 @@ export class DiceGameService {
       }
     }
     return null;
+  }
+
+  get allPieces(): Piece[] {
+    return this.looper.currentPlayer.playerProps.waitingPieces.concat(this.looper.currentPlayer.playerProps.boardPieces);
+  }
+
+  retrieveSpot(columnName: string, index: number): IBoardSpotData {
+    for (const spot of this.boardSpots) {
+      if (spot.columnName === columnName && spot.index === index) {
+        return spot;
+      }
+    }
+    return null;
+  }
+
+  removePieceFromBoard(piece: Piece) {
+    const otherPlayer = piece.player;
+    GameUtil.removeFromArray(otherPlayer.playerProps.boardPieces, piece);
+    piece.columnName = null;
+    piece.index = 0;
+    piece.active = false;
   }
 
   clearSpotActive() {

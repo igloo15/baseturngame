@@ -22,7 +22,7 @@ export class AppComponent {
 
   }
 
-  openDiceRoller(){
+  openDiceRoller() {
     this.diceGameService.roll();
     this.disableRolling = true;
     this.disableNextTurn = false;
