@@ -4,26 +4,41 @@
 export type Listener<T> = (event: T) => void;
 
 /**
+ * Intercepts event data and modifies it before getting to listeners
+ */
+export type Interceptor<T> = (event: T) => T;
+
+/**
  * Disposable returned from a subscribe
  */
-export interface Disposable {
+export interface IDisposable {
     /**
      * Will unsubscribe from event
      */
     dispose(): any;
 }
 
+export interface ITypedEvent<T> {
+    on(listener: Listener<T>): IDisposable;
+    once(listener: Listener<T>);
+    off(listener: Listener<T>);
+    intercept(interceptor: Interceptor<T>);
+    emit(event: T);
+    pipe(typedEvent: ITypedEvent<T>): IDisposable;
+}
+
 /**
  * TypedEvent is a callback event for a specific type of data
  */
-export class TypedEvent<T> {
+export class TypedEvent<T> implements ITypedEvent<T> {
     private listeners: Array<Listener<T>> = [];
     private listenersOncer: Array<Listener<T>> = [];
+    private interceptors: Array<Interceptor<T>> = [];
 
     /**
      * Subscribe to this event with given callback
      */
-    public on = (listener: Listener<T>): Disposable => {
+    public on = (listener: Listener<T>): IDisposable => {
         this.listeners.push(listener);
         return {
             dispose: () => this.off(listener)
@@ -45,10 +60,18 @@ export class TypedEvent<T> {
         if (callbackIndex > -1) { this.listeners.splice(callbackIndex, 1); }
     }
 
+    public intercept = (interceptor: Interceptor<T>) => {
+        this.interceptors.push(interceptor);
+    }
+
     /**
      * Publish data to all subscribers
      */
     public emit = (event: T) => {
+        /** Intercept before emitting */
+        this.interceptors.forEach(interceptor => {
+            event = interceptor(event);
+        });
         /** Update any general listeners */
         this.listeners.forEach((listener) => listener(event));
 
@@ -60,7 +83,7 @@ export class TypedEvent<T> {
     /**
      * Pipe all the data from this event to another event
      */
-    public pipe = (te: TypedEvent<T>): Disposable => {
+    public pipe = (te: ITypedEvent<T>): IDisposable => {
         return this.on((e) => te.emit(e));
     }
 }

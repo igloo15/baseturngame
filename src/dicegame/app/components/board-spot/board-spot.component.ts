@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DiceGameService } from '../../services/dice-game.service';
 import { Piece } from '../../models/piece';
+import { BoardService } from '../../services/board.service';
 
 export interface IBoardSpotData {
   columnName: string;
@@ -25,7 +26,7 @@ export class BoardSpotComponent implements OnInit {
 
   spotData: IBoardSpotData;
 
-  constructor(private diceGameService: DiceGameService) {
+  constructor(private diceGameService: DiceGameService, private boardService: BoardService) {
   }
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class BoardSpotComponent implements OnInit {
       };
     }
 
-    this.diceGameService.registerBoardPiece(this.spotData);
+    this.boardService.registerBoardPiece(this.spotData);
   }
 
   onClick() {

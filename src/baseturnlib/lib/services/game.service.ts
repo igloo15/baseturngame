@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class GameService {
   public saveFile: GameFile;
+  public connectedOnline: boolean;
 
   constructor(private gameStorage: GameStorageService, private logger: NGXLogger,
               private dialog: MatDialog, private snackBar: MatSnackBar) {

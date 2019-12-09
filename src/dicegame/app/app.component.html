@@ -2,17 +2,17 @@
 
 <div fxFlexFill fxLayout="column" fxLayoutGap="2vh" id="main-content">
   <div class="game-title">Ur Game</div>
-  <div class="player-turn-subtitle" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3vw">
-    <span>Current Turn : <b>{{this.diceGameService.looper.turnNumber}}</b></span>  
-    <span>Current Player : <b>Player {{this.diceGameService.looper.currentPlayer.name}}</b></span>
+  <div class="player-turn-subtitle" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3vw" *ngIf="playerService.looper">
+    <span>Current Turn : <b>{{this.playerService.looper.turnNumber}}</b></span>  
+    <span>Current Player : <b>Player {{this.playerService.looper.currentPlayer.name}}</b></span>
   </div>
-  <div fxLayout="row">
-      <dg-player-table fxFlex="25" [player]="diceGameService.playerOne" fxFlexFill [currentRoll]="diceGameService.playerOneRoll"></dg-player-table>
+  <div fxLayout="row" *ngIf="playerService.looper">
+      <dg-player-table fxFlex="25" [player]="playerService.leftPlayer" fxFlexFill></dg-player-table>
       <dg-game-table fxFlex="50"></dg-game-table>
-      <dg-player-table fxFlex="25" [player]="diceGameService.playerTwo" fxFlexFill [currentRoll]="diceGameService.playerTwoRoll"></dg-player-table>
+      <dg-player-table fxFlex="25" [player]="playerService.rightPlayer" fxFlexFill></dg-player-table>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-around center">
-      <button mat-raised-button (click)="nextTurn()" [disabled]="disableNextTurn || diceGameService.isMoveAvailable" color="primary">Next Turn</button>
-      <button mat-raised-button (click)="openDiceRoller()" [disabled]="disableRolling" color="accent">Roll</button>
+      <button mat-raised-button (click)="nextTurn()" [disabled]="!allowNextTurn || boardService.isMoveAvailable" color="primary">Next Turn</button>
+      <button mat-raised-button (click)="openDiceRoller()" [disabled]="!allowRolling" color="accent">Roll</button>
   </div>
 </div>

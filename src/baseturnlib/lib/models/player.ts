@@ -1,5 +1,7 @@
+import { Guid } from 'guid-typescript';
 
 export class Player {
+    public id: Guid;
     public name: string;
     public isTheirTurn: boolean;
     public team: string;
@@ -15,6 +17,7 @@ export class Player {
         this.name = name;
         this.team = team;
         this.role = role;
+        this.id = Guid.create();
     }
 
     getProp<T>(key: string): T {

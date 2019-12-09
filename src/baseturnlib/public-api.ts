@@ -8,6 +8,8 @@ export * from './lib/services/game-storage.service';
 export * from './lib/services/game.service';
 export * from './lib/services/game-server.service';
 export * from './lib/models/game-file';
+export * from './lib/models/online-player';
+export * from './lib/models/ai-player';
 export * from './lib/models/player';
 export * from './lib/models/team';
 export * from './lib/models/turn-loop';

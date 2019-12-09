@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TypedEvent, Listener, Disposable } from '../models/events';
+import { TypedEvent, Listener, IDisposable } from '../models/events';
 import { NGXLogger } from 'ngx-logger';
 import { MqttService, IOnConnectEvent, IOnMessageEvent, IOnErrorEvent } from 'ngx-mqtt';
 
@@ -63,7 +63,7 @@ export class GameServerService {
     }
   }
 
-  subscribe<T>(topic: string, listener: Listener<T>): Disposable {
+  subscribe<T>(topic: string, listener: Listener<T>): IDisposable {
     if (this.connected) {
       const event = new TypedEvent<T>();
       const disposable = event.on(listener);

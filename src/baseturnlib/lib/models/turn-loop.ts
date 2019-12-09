@@ -72,7 +72,7 @@ export class TurnLoop {
 
     public shufflePlayers() {
         this.players = GameUtil.randomizeArray<Player>(this.players);
-        for(let i = 0; i < this.players.length; i++) {
+        for (let i = 0; i < this.players.length; i++) {
             this.players[i].index = i + 1;
         }
     }
